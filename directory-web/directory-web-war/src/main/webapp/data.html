@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>大数据</title>
+<link rel="stylesheet" type="text/css" href="static/css/data.css">
+<script type="text/javascript" src="static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="static/js/tab.js"></script>
+</head>
+
+<body>
+	<div class="data_cont mar_a w_100" id="tab">
+		<!--data_cont_nav start-->
+		<div class="data_cont_nav mar_a h_lh ba_b02 w_100">
+			<ul class="w_100 mar_a oUl">
+				<li class="fl current" id="one1" onclick="setTab('one',1,4)">基础表管理</li>
+				<li class="fl" id="one2" onclick="setTab('one',2,4)">文件管理</li>
+				<li class="fl" id="one3" onclick="setTab('one',3,4)">报表管理</li>
+				<li class="fl" id="one4" onclick="setTab('one',4,4)">参数管理</li>
+			</ul>
+		</div>
+		<!--data_cont_nav start-->
+		<!--data_cont_cont start-->
+		<div class="data_cont_cont mar_a" id="con_one_1">
+			<div class="data_cont_cont_tab01 mar_a">
+				<div class="top bor_01 mar_a">
+					<h2 class="ba_b01">
+						<span class="fa fa-search sp01"></span> <span>快速查询</span>
+					</h2>
+					<div class="top_search ba_b03">
+						<span class="sp01">数据库:</span> <select>
+							<option>cloudera_manager_metastore_</option>
+							<option>cloudera_manager_metastore_</option>
+							<option>cloudera_manager_metastore_</option>
+						</select>
+						<button class="ba_b01">查询</button>
+					</div>
+				</div>
+				<button class="ba_b01 btn01">建表</button>
+				<div class="data_table mar_a w_100">
+					<table cellpadding="0" cellspacing="0" class="bor_01">
+						<tr class="ba_b02 col_01">
+							<th class="th01">表名称</th>
+							<th>操作</th>
+						</tr>
+						<tr>
+							<td class="td01">count_result_1449384382532</td>
+							<td><span class="fa fa-search col_01"></span> <span
+								class="fa fa-trash-o col_01"></span> <span
+								class="fa fa-edit col_01"></span></td>
+						</tr>
+						<tr>
+							<td class="td01">count_result_1449384382532</td>
+							<td><span class="fa fa-search col_01"></span> <span
+								class="fa fa-trash-o col_01"></span> <span
+								class="fa fa-edit col_01"></span></td>
+						</tr>
+						<tr>
+							<td class="td01">count_result_1449384382532</td>
+							<td><span class="fa fa-search col_01"></span> <span
+								class="fa fa-trash-o col_01"></span> <span
+								class="fa fa-edit col_01"></span></td>
+						</tr>
+						<tr class="last_tr">
+							<td class="td01">count_result_1449384382532</td>
+							<td><span class="fa fa-search col_01"></span> <span
+								class="fa fa-trash-o col_01"></span> <span
+								class="fa fa-edit col_01"></span></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--data_cont_cont end-->
+		<!--data_cont_cont start-->
+		<div class="data_cont_cont mar_a" id="con_one_2"
+			style="display: none;">
+			<div class="data_cont_cont_tab01 mar_a">
+				<div class="data_cont_cont_btn">
+					<button class="ba_b01 btn01">创建目录</button>
+					<button class="ba_b01 btn01">上传文件</button>
+					<span class="fa fa-trash-o col_01"></span> <span
+						class="fa fa-edit col_01"></span>
+				</div>
+				<div class="data_table mar_a w_100">
+					<table cellpadding="0" cellspacing="0" class="bor_01">
+						<tr id="tr01">
+							<th class="th01">名称</th>
+							<th class="th02">大小</th>
+							<th class="th02">用户</th>
+							<th class="th02">组</th>
+							<th class="th02">权限</th>
+							<th class="th03">日期</th>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td class="td02"></td>
+							<td class="td03">root</td>
+							<td class="td04">supergroup</td>
+							<td class="td05">supergroup</td>
+							<td class="td06">2015-11-27&nbsp;22:19:13</td>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td class="td02"></td>
+							<td class="td03">root</td>
+							<td class="td04">supergroup</td>
+							<td class="td05">supergroup</td>
+							<td class="td06">2015-11-27&nbsp;22:19:13</td>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td class="td02"></td>
+							<td class="td03">root</td>
+							<td class="td04">supergroup</td>
+							<td class="td05">supergroup</td>
+							<td class="td06">2015-11-27&nbsp;22:19:13</td>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td class="td02"></td>
+							<td class="td03">root</td>
+							<td class="td04">supergroup</td>
+							<td class="td05">supergroup</td>
+							<td class="td06">2015-11-27&nbsp;22:19:13</td>
+						</tr>
+
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--data_cont_cont end-->
+		<!--data_cont_cont start-->
+		<div class="data_cont_cont mar_a" id="con_one_3"
+			style="display: none;">
+			<div class="data_cont_cont_tab01 mar_a">
+				<div class="data_cont_cont_btn">
+					<button class="ba_b01 btn01">新增模版</button>
+				</div>
+				<div class="data_table mar_a w_100">
+					<table cellpadding="0" cellspacing="0" class="bor_01">
+						<tr id="tr01">
+							<th class="th01">报表名称</th>
+							<th class="th02">创建人</th>
+							<th class="th03">操作</th>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td class="td02">root</td>
+							<td class="td03"><span>查看</span> <span>编辑</span> <span>删除</span>
+								<span>授权</span></td>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td>root</td>
+							<td><span>查看</span> <span>编辑</span> <span>删除</span> <span>授权</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td>root</td>
+							<td><span>查看</span> <span>编辑</span> <span>删除</span> <span>授权</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td>root</td>
+							<td><span>查看</span> <span>编辑</span> <span>删除</span> <span>授权</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td>root</td>
+							<td><span>查看</span> <span>编辑</span> <span>删除</span> <span>授权</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td>root</td>
+							<td><span>查看</span> <span>编辑</span> <span>删除</span> <span>授权</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--data_cont_cont end-->
+		<!--data_cont_cont start-->
+		<div class="data_cont_cont mar_a" id="con_one_4"
+			style="display: none;">
+			<div class="data_cont_cont_tab01 mar_a">
+				<div class="data_cont_cont_btn">
+					<button class="ba_b01 btn01">新增参数</button>
+				</div>
+				<div class="data_table mar_a w_100">
+					<table cellpadding="0" cellspacing="0" class="bor_01">
+						<tr id="tr01">
+							<th class="th01">参数名称</th>
+							<th class="th02">参数值</th>
+							<th class="th02">参数名</th>
+							<th class="th03">操作</th>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td>root</td>
+							<td>supergroup</td>
+							<td><span>查看</span> <span>编辑</span> <span>删除</span></td>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td>root</td>
+							<td>supergroup</td>
+							<td><span>查看</span> <span>编辑</span> <span>删除</span></td>
+						</tr>
+						<tr>
+							<td class="td01">home</td>
+							<td>root</td>
+							<td>supergroup</td>
+							<td><span>查看</span> <span>编辑</span> <span>删除</span></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--data_cont_cont end-->
+	</div>
+	<!--data_content end-->
+	<!--<script type="text/javascript">
+	var oTab=document.getElementById("tab");
+var oLis=oTab.getElementsByTagName("li");
+var oDivs=oTab.getElementsByClassName("data_cont_cont")[0];
+for(var i=0;i<oLis.length;i++){
+    var oLi=oLis[i];
+    oLi.index=i;
+    oLi.onclick=function(){
+        for( var j=0;j<oLis.length;j++){
+            oLis[j].className=null;
+            oDivs[j].className=null;
+        }
+        this.className="select";
+        oDivs[this.index].className="select"
+    }
+}
+</script>-->
+</body>
+</html>

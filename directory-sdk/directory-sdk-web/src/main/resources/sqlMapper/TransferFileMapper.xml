@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.net.caas.directory.sdk.scanner.dao.TransferFileDAO">
+	<resultMap type="transferFile" id="resultMap">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="task_id" property="taskId" jdbcType="BIGINT" />
+		<result column="source_Path" property="sourcePath" jdbcType="VARCHAR" />
+		<result column="dest_Path" property="destPath" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="retry" property="retry" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="lock" property="lock" jdbcType="INTEGER" />
+		<result column="executionTime" property="executionTime"
+			jdbcType="DATE" />
+	</resultMap>
+
+	<select id="findTransferTask" resultMap="resultMap">
+		SELECT
+		id,task_id,source_Path,dest_Path,user_id,retry,t_lock,t_status,executionTime
+		FROM transfer_file
+		WHERE t_lock = 0
+		AND t_status = 0
+		AND <![CDATA[executionTime <= SYSDATE() ]]>
+		AND <![CDATA[ retry <  #{retry,jdbcType=INTEGER}  ]]>
+		ORDER BY executionTime
+		LIMIT 0 , #{maxTaskNum,jdbcType=INTEGER}
+	</select>
+
+	<update id="lockTransferTask" parameterType="java.lang.Long">
+		UPDATE transfer_file
+		SET t_lock=100 , retry = (retry+1) WHERE id=#{id,jdbcType=BIGINT} AND
+		t_lock=0
+	</update>
+
+	<update id="unlockTransferTask" parameterType="java.lang.Long">
+		UPDATE
+		transfer_file SET t_lock=0 WHERE id=#{id,jdbcType=BIGINT} AND
+		t_lock=100
+	</update>
+
+	<update id="finishTask" parameterType="java.lang.Long">
+		UPDATE
+		transfer_file SET
+		t_status=200 WHERE id=#{id,jdbcType=BIGINT} AND
+		t_status = 0
+	</update>
+
+	<insert id="saveTransferFile" parameterType="transferFile">
+		INSERT INTO
+		transfer_file (
+		task_id,
+		source_Path,
+		dest_Path,
+		user_id,
+		retry,
+		executionTime
+		)VALUES (
+		#{taskId,jdbcType=BIGINT} ,
+		#{sourcePath,jdbcType=VARCHAR},
+		#{destPath,jdbcType=VARCHAR},
+		#{userId,jdbcType=BIGINT},
+		0,
+		#{executionTime,jdbcType=DATE}
+		);
+	</insert>
+
+	<insert id="batchTransferFile" parameterType="java.util.List">
+		INSERT INTO transfer_file
+		(task_id,source_Path,dest_Path,user_id,retry,executionTime)VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.taskId,jdbcType=BIGINT} ,
+			#{item.sourcePath,jdbcType=VARCHAR},
+			#{item.destPath,jdbcType=VARCHAR},
+			#{item.userId,jdbcType=BIGINT},
+			0,
+			#{item.executionTime,jdbcType=DATE}
+			)
+		</foreach>
+	</insert>
+
+
+</mapper>

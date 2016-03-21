@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.net.caas.directory.sdk.scanner.dao.UserFolderDAO">
+	<resultMap id="BaseResultMap" type="cn.net.caas.directory.sdk.domain.UserFolder">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="path" property="path" jdbcType="VARCHAR" />
+		<result column="rw" property="rw" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, user_id, path, rw
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user_folder
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteUserFolderById" parameterType="java.lang.Long">
+		delete from
+		user_folder
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<delete id="deleteUserFolderByUserId" parameterType="java.lang.Long">
+		delete from
+		user_folder
+		where user_id = #{id,jdbcType=BIGINT}
+	</delete>
+
+
+	<insert id="insert" parameterType="cn.net.caas.directory.sdk.domain.UserFolder">
+		insert into user_folder (id,
+		user_id, path,
+		rw)
+		values
+		(#{id,jdbcType=BIGINT},
+		#{userId,jdbcType=BIGINT},
+		#{path,jdbcType=VARCHAR},
+		#{rw,jdbcType=INTEGER})
+	</insert>
+	<insert id="batchSaveUserFolder" parameterType="java.util.List">
+		insert into
+		user_folder (
+		user_id, path,
+		rw)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.userId},
+			#{item.path},
+			#{item.rw})
+		</foreach>
+	</insert>
+
+	<select id="queryUserFolder" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user_folder
+		where user_id = #{userId,jdbcType=BIGINT}
+	</select>
+</mapper>

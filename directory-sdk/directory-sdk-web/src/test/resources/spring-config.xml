@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+						   http://www.springframework.org/schema/context
+						   http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<description>Spring Configuration</description>
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:properties/system.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 启用spring mvc 注解 -->
+	<context:annotation-config />
+	<!-- 使用Annotation自动注册Bean -->
+	<context:component-scan
+		base-package="cn.net.caas.directory.sdk.service.impl,cn.net.caas.directory.sdk.service.export.impl" />
+
+
+	<import resource="spring/spring-config-jdbc.xml" />
+	<import resource="spring-mybatis/mybatis-config.xml" />
+	<import resource="spring/spring-config-dubbo.xml" />
+</beans>

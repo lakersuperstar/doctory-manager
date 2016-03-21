@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration PUBLIC  
+    "-//mybatis.org//DTD Config 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	   <typeAlias alias="transferFile" type="cn.net.caas.directory.sdk.domain.TransferFile"/>
+	   <typeAlias alias="userInfo" type="cn.net.caas.directory.sdk.domain.UserInfo"/>
+	   <typeAlias alias="userQuery" type="cn.net.caas.directory.sdk.query.UserQuery"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="sqlMapper/UserFolderMapper.xml" />
+		<mapper resource="sqlMapper/TransferFileMapper.xml" />
+	</mappers>
+</configuration>  

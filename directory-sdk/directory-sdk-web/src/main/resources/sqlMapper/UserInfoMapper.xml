@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.net.caas.directory.sdk.scanner.dao.UserDAO">
+	<resultMap id="BaseResultMap" type="userInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="account" property="account" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="companyName" property="companyName" jdbcType="VARCHAR" />
+		<result column="department" property="department" jdbcType="VARCHAR" />
+		<result column="expire" property="expire" jdbcType="DATE" />
+		<result column="createDate" property="createDate" jdbcType="DATE" />
+		<result column="role" property="role" jdbcType="INTEGER" />
+		<result column="yn" property="yn" jdbcType="INTEGER" />
+		<result column="is_auto_transfer" property="isAutoTransfer"
+			jdbcType="INTEGER" />
+	</resultMap>
+
+	<insert id="savaUser" parameterType="userInfo">
+		INSERT INTO user_info
+		(account,password,name,phone,companyName,department,expire,create_date,yn,role,is_auto_transfer)
+		VALUES
+		(#{account,jdbcType=VARCHAR}
+		,#{password,jdbcType=VARCHAR}
+		,#{name,jdbcType=VARCHAR}
+		,#{phone,jdbcType=VARCHAR}
+		,#{companyName,jdbcType=VARCHAR}
+		,#{department,jdbcType=VARCHAR}
+		,#{expire,jdbcType=DATE}
+		,SYSDATE()
+		,#{yn,jdbcType=INTEGER}
+		,#{role,jdbcType=INTEGER}
+		,#{isAutoTransfer,jdbcType=INTEGER})
+	</insert>
+
+	<update id="updateUser" parameterType="userInfo">
+		UPDATE user_info
+		<set>
+			<if test="account !=null and account !='' ">
+				account = #{account,jdbcType=VARCHAR},
+			</if>
+			<if test="password !=null and password !='' ">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="name !=null and name !='' ">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="phone !=null and phone !='' ">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="companyName !=null and companyName !='' ">
+				companyName = #{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="department !=null and department !='' ">
+				department = #{department,jdbcType=VARCHAR},
+			</if>
+			<if test="expire !=null">
+				expire = #{expire,jdbcType=DATE},
+			</if>
+			<if test="yn > 0">
+				yn = #{yn,jdbcType=INTEGER},
+			</if>
+			<if test="role > 0">
+				role = #{role,jdbcType=INTEGER},
+			</if>
+			<if test="isAutoTransfer > 0">
+				is_auto_transfer = #{isAutoTransfer,jdbcType=INTEGER},
+			</if>
+		</set>
+		WHERE id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="queryUserById" resultMap="resultMap">
+		SELECT id,
+		account,password,name,phone,companyName,department,expire,create_date,yn,role,is_auto_transfer
+		FROM user_info
+		WHERE id= #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="queryUserByAccount" resultMap="resultMap">
+		SELECT id,
+		account,password,name,phone,companyName,department,expire,create_date,yn,role,is_auto_transfer
+		FROM user_info
+		WHERE account= #{account,jdbcType=VARCHAR}
+	</select>
+
+	<select id="queryUserPage" resultMap="resultMap" parameterType="userQuery">
+		SELECT id,
+		account,password,name,phone,companyName,department,expire,create_date,yn,role,is_auto_transfer
+		FROM user_info
+		WHERE 1=1
+		<if test="account !=null and account !='' ">
+			AND account = #{account,jdbcType=VARCHAR},
+		</if>
+		<if test="name !=null and name !='' ">
+			AND name LIKE '%#{name,jdbcType=VARCHAR}%',
+		</if>
+		<if test="yn > 0">
+			AND yn = #{yn,jdbcType=INTEGER},
+		</if>
+		<if test="role > 0">
+			AND role = #{role,jdbcType=INTEGER},
+		</if>
+		ORDER BY create_date
+		LIMIT
+		#{startrownum,jdbcType=INTEGER},#{endrownum,jdbcType=INTEGER}
+	</select>
+
+
+	<select id="queryTotalRecord" resultMap="resultMap"
+		parameterType="userQuery">
+		SELECT COUNT(id)
+		WHERE 1=1
+		<if test="account !=null and account !='' ">
+			AND account = #{account,jdbcType=VARCHAR},
+		</if>
+		<if test="name !=null and name !='' ">
+			AND name LIKE '%#{name,jdbcType=VARCHAR}%',
+		</if>
+		<if test="yn > 0">
+			AND yn = #{yn,jdbcType=INTEGER},
+		</if>
+		<if test="role > 0">
+			AND role = #{role,jdbcType=INTEGER},
+		</if>
+	</select>
+
+	<select id="verifyUser" resultMap="resultMap">
+		SELECT id,
+		account,password,name,phone,companyName,department,expire,create_date,yn,role,is_auto_transfer
+		FROM user_info
+		WHERE account= #{account,jdbcType=VARCHAR}
+		AND password=
+		#{password,jdbcType=VARCHAR}
+	</select>
+
+	<update id="changePassword" >
+		UPDATE user_info SET password =
+		#{newPwd,jdbcType=VARCHAR}
+		WHERE account= #{account,jdbcType=VARCHAR}
+		AND password=#{oldPwd,jdbcType=VARCHAR}
+	</update>
+
+</mapper>
